@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Web_Clone_Ebay")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c69d5755939b0aa72e279d857e8f4455570283d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Web_Clone_Ebay")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Web_Clone_Ebay")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

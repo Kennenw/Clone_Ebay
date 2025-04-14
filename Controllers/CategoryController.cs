@@ -26,7 +26,7 @@ namespace Web_Clone_Ebay.Controllers
             {
                 var categories = await _context.Categories
                     .AsNoTracking()
-                    .Select( c => new Category{
+                    .Select( c => new CategoryViewModel{
                         Id = c.Id,
                         Name = c.Name,
                     })

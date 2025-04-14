@@ -153,3 +153,4 @@ D:\CybrerDotNet\Lession21_DotNetCore\BT\Web_Clone_Ebay\obj\Debug\net8.0\ref\Web_
 D:\CybrerDotNet\Lession21_DotNetCore\BT\Web_Clone_Ebay\obj\Debug\net8.0\Web_Clone_Ebay.RazorAssemblyInfo.cache
 D:\CybrerDotNet\Lession21_DotNetCore\BT\Web_Clone_Ebay\obj\Debug\net8.0\Web_Clone_Ebay.RazorAssemblyInfo.cs
 D:\CybrerDotNet\Lession21_DotNetCore\BT\Web_Clone_Ebay\bin\Debug\net8.0\Web_Clone_Ebay.staticwebassets.runtime.json
+D:\CybrerDotNet\Lession21_DotNetCore\BT\Web_Clone_Ebay\obj\Debug\net8.0\Web_Clone_Ebay.sourcelink.json
