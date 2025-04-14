@@ -1,0 +1,126 @@
+@page "/product/{Id:int}"
+@inject HttpClient Http
+@inject NavigationManager Nav
+<div class="container my-4">
+    <!-- Back Link -->
+    <a href="/" class="text-primary mb-3 d-inline-block" style="text-decoration: none;">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-1">
+            <path fill-rule="evenodd"
+                  d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+        </svg>
+        Back to Products
+    </a>
+
+    @if (isLoading)
+    {
+        <div class="text-center my-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Loading product details...</p>
+        </div>
+    }
+    else if (product == null)
+    {
+        <div class="alert alert-danger text-center">
+            Product not found.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <!-- Product Images -->
+            <div class="col-md-6">
+                <div class="product-image-container">
+                    <img src="@(mainImageUrl ?? "https://via.placeholder.com/400x400?text=No+Image")"
+                         alt="@product.Name" class="main-image img-fluid rounded" />
+                </div>
+                @if (product.ListImage.Any())
+                {
+                    <div class="thumbnail-container mt-2 d-flex flex-wrap">
+                        @foreach (var image in product.ListImage)
+                        {
+                            <img src="@image.ImageUrl" alt="Thumbnail" class="thumbnail img-fluid me-2 mb-2 rounded"
+                                 style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;"
+                                 @onclick="() => mainImageUrl = image.ImageUrl" />
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- Product Details -->
+            <div class="col-md-6">
+                <h2 class="product-title ebay-blue">@product.Name</h2>
+                <p class="product-price text-success fs-3">@product.Price.ToString("C")</p>
+                <p class="product-description">@product.Description</p>
+                <p class="product-category">
+                    <strong>Category:</strong> @product.Category
+                </p>
+                <p class="product-created">
+                    <strong>Listed on:</strong> @product.CreatedAt.ToString("MMM dd, yyyy")
+                </p>
+            </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="mt-5">
+            <h4>Product Details</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <strong>Product ID:</strong> @product.Id
+                </li>
+                <li class="list-group-item">
+                    <strong>Category:</strong> @product.Category
+                </li>
+                <li class="list-group-item">
+                    <strong>Price:</strong> @product.Price.ToString("C")
+                </li>
+                <li class="list-group-item">
+                    <strong>Listed on:</strong> @product.CreatedAt.ToString("MMM dd, yyyy")
+                </li>
+            </ul>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private ProductDetailResultVM? product;
+    private bool isLoading = true;
+    private string? mainImageUrl;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProduct();
+    }
+
+    private async Task LoadProduct()
+    {
+        try
+        {
+            isLoading = true;
+            product = await Http.GetFromJsonAsync<ProductDetailResultVM>($"http://localhost:5167/api/Product/{Id}");
+            if (product != null && product.ListImage.Any())
+            {
+                mainImageUrl = product.ListImage.First().ImageUrl;
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            product = null;
+            Console.WriteLine(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            product = null; 
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+}

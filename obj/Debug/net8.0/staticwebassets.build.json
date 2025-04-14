@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "Bek59Ff95nYMvlTzXTOHkKeqEoclRA08TI3EjhpVXwo=",
+  "Source": "Web_Clone_Ebay",
+  "BasePath": "_content/Web_Clone_Ebay",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Web_Clone_Ebay\\wwwroot",
+      "Source": "Web_Clone_Ebay",
+      "ContentRoot": "D:\\CybrerDotNet\\Lession21_DotNetCore\\BT\\Web_Clone_Ebay\\wwwroot\\",
+      "BasePath": "_content/Web_Clone_Ebay",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\CybrerDotNet\\Lession21_DotNetCore\\BT\\Web_Clone_Ebay\\wwwroot\\css\\site.css",
+      "SourceId": "Web_Clone_Ebay",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\CybrerDotNet\\Lession21_DotNetCore\\BT\\Web_Clone_Ebay\\wwwroot\\",
+      "BasePath": "_content/Web_Clone_Ebay",
+      "RelativePath": "css/site.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    }
+  ]
+}

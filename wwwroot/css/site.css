@@ -1,0 +1,518 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.ebay-blue {
+    color: #0654BA;
+}
+
+.ebay-search-bar {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.ebay-search-bar .form-select,
+.ebay-search-bar .form-control {
+    border-radius: 0;
+}
+
+.ebay-search-bar .btn {
+    border-radius: 0;
+    background-color: #3665F3;
+    border-color: #3665F3;
+}
+
+.filter-btn {
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.product-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.product-item.pink-border {
+    border: 2px solid #FF69B4;
+    padding: 13px;
+}
+
+.product-item img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.product-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.product-shipping,
+.product-watchers {
+    font-size: 14px;
+    color: #555;
+}
+
+.sidebar {
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
+}
+
+.sidebar h4 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.sidebar a {
+    font-size: 14px;
+    color: #0654BA;
+}
+
+.pagination .page-link {
+    border-radius: 4px;
+    margin: 0 3px;
+    color: #333;
+    font-size: 14px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #3665F3;
+    border-color: #3665F3;
+    color: white;
+}
+
+.sort-select {
+    font-size: 14px;
+}
+
+.ebay-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .search-bar {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .search-bar .input-group {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .search-bar select, .search-bar input {
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .search-bar button {
+        background: #007bff;
+        border: none;
+        border-radius: 6px;
+        transition: background 0.3s;
+    }
+
+    .search-bar button:hover {
+        background: #0056b3;
+    }
+
+    .sidebar {
+        background: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .sidebar li {
+        margin: 10px 0;
+    }
+
+    .sidebar span {
+        cursor: pointer;
+        color: #007bff;
+        transition: color 0.3s;
+    }
+
+    .sidebar span:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .product-card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 15px;
+        transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+
+    .product-card a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+    }
+
+    .product-card a:hover {
+        color: #007bff;
+    }
+
+    .product-card .price {
+        color: #e44d26;
+        font-size: 1.2em;
+        margin: 10px 0;
+    }
+
+    .filters {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 6px;
+    }
+
+    .filters select {
+        width: 200px;
+        border-radius: 6px;
+    }
+
+    /* Phân trang mới */
+    .pagination-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .pagination {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin: 0;
+    }
+
+    .pagination li {
+        display: inline-flex;
+    }
+
+    .pagination .page-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        background: #fff;
+        color: #007bff;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+
+    .pagination .page-link:hover {
+        background: #007bff;
+        color: #fff;
+        border-color: #007bff;
+    }
+
+    .pagination .page-item.active .page-link {
+        background: #007bff;
+        color: #fff;
+        border-color: #007bff;
+    }
+
+    .pagination .page-item.disabled .page-link {
+        background: #f5f5f5;
+        color: #ccc;
+        cursor: not-allowed;
+        border-color: #ddd;
+    }
+
+    .pagination .ellipsis {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        color: #666;
+        font-size: 14px;
+    }
+
+    .page-size {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .page-size label {
+        margin: 0;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .page-size select {
+        width: 80px;
+        border-radius: 6px;
+        padding: 6px;
+        font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+        .pagination-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .pagination {
+            gap: 3px;
+        }
+
+        .pagination .page-link, .pagination .ellipsis {
+            width: 32px;
+            height: 32px;
+            font-size: 12px;
+        }
+
+        .page-size {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .page-size select {
+            width: 100px;
+        }
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 25px;
+        padding: 12px 15px;
+        background: linear-gradient(180deg, #ffffff, #f8f9fa);
+        border-radius: 10px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .pagination-container .results {
+        font-size: 14px;
+        color: #444;
+        font-weight: 500;
+    }
+
+    .pagination {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .pagination li {
+        display: inline-flex;
+    }
+
+    .pagination .page-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        background: #fff;
+        color: #007bff;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .pagination .page-link:hover {
+        background: #007bff;
+        color: #fff;
+        border-color: #007bff;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0,123,255,0.3);
+    }
+
+    .pagination .page-item.active .page-link {
+        background: #007bff;
+        color: #fff;
+        border-color: #007bff;
+        box-shadow: 0 2px 4px rgba(0,123,255,0.3);
+    }
+
+    .pagination .page-item.disabled .page-link {
+        background: #f8f9fa;
+        color: #ccc;
+        border-color: #e0e0e0;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .pagination .ellipsis {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        color: #666;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .page-size {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .page-size label {
+        margin: 0;
+        font-size: 14px;
+        color: #444;
+        font-weight: 500;
+    }
+
+    .page-size select {
+        width: 90px;
+        padding: 8px;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        background: #fff;
+        font-size: 14px;
+        color: #333;
+        cursor: pointer;
+        transition: border-color 0.3s ease;
+    }
+
+    .page-size select:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0,123,255,0.2);
+    }
+
+    @media (max-width: 768px) {
+        .pagination-container {
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .pagination {
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pagination .page-link, .pagination .ellipsis {
+            width: 36px;
+            height: 36px;
+            font-size: 13px;
+        }
+
+        .page-size {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .page-size select {
+            width: 120px;
+        }
+
+        .pagination-container .results {
+            font-size: 13px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .pagination .page-link, .pagination .ellipsis {
+            width: 32px;
+            height: 32px;
+            font-size: 12px;
+        }
+
+        .page-size select {
+            width: 100px;
+        }
+    }
+
+    .product-title {
+        font-weight: 600;
+        color: #003087; /* eBay blue */
+    }
+
+    .product-price {
+        font-weight: bold;
+    }
+
+    .product-description {
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .main-image {
+        max-height: 400px;
+        object-fit: contain;
+        width: 100%;
+    }
+
+    .thumbnail:hover {
+        border: 2px solid #003087;
+    }
+
+    .ebay-blue {
+        color: #003087;
+    }

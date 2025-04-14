@@ -1,0 +1,306 @@
+@page "/"
+@inject HttpClient Http
+
+<div class="container my-3">
+    <!-- Search Bar -->
+    <div class="ebay-search-bar mb-4">
+        <div class="input-group">
+            @* <select class="form-select" style="max-width: 200px;">
+                <option value="0">All Categories</option>
+                @if (categories != null)
+                {
+                    @foreach (var category in categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                }
+            </select> *@
+            <input type=" text" class="form-control" placeholder="Search for anything" @bind="searchQuery" />
+            <button class="btn btn-primary" @onclick="SearchProducts">Search</button>
+        </div>
+    </div>
+    <h2 class="mb-3">Luxury on eBay</h2>
+    <!-- Main Content -->
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 sidebar">
+            <p class="mt-3">
+                <strong>Shop by Category</strong><br />
+                @if (categories == null)
+                {
+                <div class="text-center my-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p>Loading categories...</p>
+                </div>
+            }
+            else if (!categories.Any())
+            {
+                <div class="alert alert-info text-center">
+                    No categories found.
+                </div>
+            }
+            else
+            {
+                <ul>
+                    @foreach (var category in categories)
+                    {
+                        <li style="list-style-type: none;">
+                            <span style="cursor: pointer; text-decoration: none;"
+                                @onclick="() => SearchProductByCategory(category.Id.ToString())">@category.Name</span>
+                        </li>
+                    }
+                </ul>
+            }
+            </p>
+        </div>
+        <!-- Product List -->
+        <div class="col-md-9">
+
+
+            <!-- Filters and Sorting -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <span class="ms-3">@(products?.TotalCount ?? 0) Results</span>
+                </div>
+                <div>
+                    <select class="form-select sort-select" @bind="sortOption" @bind:after="OnSortChanged">
+                        <option value="BestMatch">Best Match</option>
+                        <option value="PriceLowToHigh">Price: Low to High</option>
+                        <option value="PriceHighToLow">Price: High to Low</option>
+                        <option value="Name">Name: A to Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Product List -->
+            @if (products == null)
+            {
+                <div class="text-center my-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p>Loading products...</p>
+                </div>
+            }
+            else if (!products.Items.Any())
+            {
+                <div class="alert alert-info text-center">
+                    No products found.
+                </div>
+            }
+            else
+            {
+                <div>
+                    @foreach (var product in products.Items)
+                    {
+                        <div class="product-item d-flex mb-3">
+                            <img src="@(product.ImageUrls ?? "https://via.placeholder.com/120x120?text=No+Image")"
+                                alt="@product.Name" style="width: 120px; height: 120px; object-fit: cover;" />
+                            <div class="ms-3">
+                                <a href="/product/@product.Id" class="product-title ebay-blue"
+                                    style="text-decoration: none;">@product.Name</a>
+                                <p class="product-price">@product.Price.ToString("C")</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                @if (products != null && products.Items.Any())
+                {
+                    <div class="pagination-container">
+                        <span class="results">Showing @(products?.Items.Count ?? 0) of @(products?.TotalCount ?? 0)
+                            products</span>
+                        <nav>
+                            <ul class="pagination">
+                                <li class="page-item @(pageIndex == 1 ? "disabled" : "")">
+                                    <button class="page-link" @onclick="() => ChangePage(pageIndex - 1)">
+                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                    </button>
+                                </li>
+                                @if (pageIndex > 3)
+                                {
+                                    <li class="page-item">
+                                        <button class="page-link" @onclick="() => ChangePage(1)">1</button>
+                                    </li>
+                                    @if (pageIndex > 4)
+                                    {
+                                        <li class="ellipsis">...</li>
+                                    }
+                                }
+                                @for (int i = Math.Max(1, pageIndex - 2); i <= Math.Min(totalPages, pageIndex + 2); i++)
+                                {
+                                    var pageNum = i;
+                                    <li class="page-item @(i == pageIndex ? "active" : "")">
+                                        <button class="page-link" @onclick="() => ChangePage(pageNum)">@i</button>
+                                    </li>
+                                }
+                                @if (pageIndex < totalPages - 2)
+                                {
+                                    @if (pageIndex < totalPages - 3)
+                                    {
+                                        <li class="ellipsis">...</li>
+                                    }
+                                    <li class="page-item">
+                                        <button class="page-link" @onclick="() => ChangePage(totalPages)">@totalPages</button>
+                                    </li>
+                                }
+                                <li class="page-item @(pageIndex == totalPages ? "disabled" : "")">
+                                    <button class="page-link" @onclick="() => ChangePage(pageIndex + 1)">
+                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="page-size">
+                            <label for="pageSize">Per page:</label>
+                            <select id="pageSize" class="form-select" @bind="pageSize" @bind:after="OnPageSizeChanged">
+                                <option value="3">3</option>
+                                <option value="6">6</option>
+                                <option value="12">12</option>
+                                <option value="24">24</option>
+                            </select>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private PaginatedResult<ProductViewModel> products = new()
+    {
+        Items = new List<ProductViewModel>(),
+        TotalCount = 0
+    };
+    private List<Category>? categories;
+    private int pageIndex = 1;
+    private int pageSize = 3;
+    private int totalPages => products.TotalCount > 0 ? (int)Math.Ceiling((double)products.TotalCount / pageSize) : 1;
+    private string searchQuery = "";
+    private string? sortOption;
+    private string? categoryId;
+    private string sortBy => sortOption switch
+    {
+        "PriceLowToHigh" => "Price",
+        "PriceHighToLow" => "Price",
+        "Name" => "Name",
+        _ => "Id"
+    };
+    private bool isSort => sortOption != "PriceHighToLow";
+    private string selectedCategoryId = "0";
+    private DateTime? lastSearchTime;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCategories();
+        await LoadProducts();
+    }
+
+    private async Task LoadProducts()
+    {
+        try
+        {
+            var queryParams = new List<string>
+{
+$"pageIndex={pageIndex}",
+$"pageSize={pageSize}",
+$"sortby={Uri.EscapeDataString(sortBy)}",
+$"isSort={isSort}",
+$"categoryById={categoryId}"
+};
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                queryParams.Add($"search={Uri.EscapeDataString(searchQuery)}");
+            }
+            if (selectedCategoryId != "0")
+            {
+                queryParams.Add($"categoryId={selectedCategoryId}");
+            }
+
+            var url = $"http://localhost:5167/api/Product?{string.Join("&", queryParams)}";
+            var response = await Http.GetFromJsonAsync<PaginatedResult<ProductViewModel>>(url);
+
+            products = response ?? new PaginatedResult<ProductViewModel>
+            {
+                Items = new List<ProductViewModel>(),
+                TotalCount = 0
+            };
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine(ex.Message);
+            products = new PaginatedResult<ProductViewModel>
+            {
+                Items = new List<ProductViewModel>(),
+                TotalCount = 0
+            };
+        }
+        catch (Exception ex)
+        {
+            products = new PaginatedResult<ProductViewModel>
+            {
+                Items = new List<ProductViewModel>(),
+                TotalCount = 0
+            };
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            StateHasChanged();
+        }
+    }
+
+    private async Task LoadCategories()
+    {
+        try
+        {
+            categories = await Http.GetFromJsonAsync<List<Category>>("http://localhost:5167/api/Category");
+            categories ??= new List<Category>();
+        }
+        catch (Exception ex)
+        {
+            categories = new List<Category>();
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    private async Task SearchProducts()
+    {
+        pageIndex = 1;
+        await LoadProducts();
+        StateHasChanged();
+    }
+
+    private async Task SearchProductByCategory(string id)
+    {
+        categoryId = id;
+        await LoadProducts();
+    }
+
+    private async Task OnSortChanged()
+    {
+        await LoadProducts();
+    }
+    private async Task OnPageSizeChanged()
+    {
+        await LoadProducts();
+    }
+
+    private async Task ChangePage(int newPageIndex)
+    {
+        if (newPageIndex >= 1 && newPageIndex <= totalPages)
+        {
+            pageIndex = newPageIndex;
+            await LoadProducts();
+        }
+    }
+}

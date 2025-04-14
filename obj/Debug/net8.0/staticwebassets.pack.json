@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\CybrerDotNet\\Lession21_DotNetCore\\BT\\Web_Clone_Ebay\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Web_Clone_Ebay.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Web_Clone_Ebay.props",
+      "PackagePath": "build\\Web_Clone_Ebay.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Web_Clone_Ebay.props",
+      "PackagePath": "buildMultiTargeting\\Web_Clone_Ebay.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Web_Clone_Ebay.props",
+      "PackagePath": "buildTransitive\\Web_Clone_Ebay.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
